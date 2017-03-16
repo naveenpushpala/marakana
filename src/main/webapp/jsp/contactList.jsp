@@ -5,15 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Contacts</title>
+<title>Hello World (JSP)</title>
 </head>
 <body>
-	Contacts From JSP 
-	
-	<ul>
-	<c:forEach var="name" items="${contacts}">
-		<li><a href="???">${contact.name}</a></li>
+	Hello World! From JSP 
+	<c:forEach var="contact" items="${contacts}">
+		<h1>Hello, ${contact.name}!</h1>
+		<h1>Hello, ${contact.addressId}!</h1>
+		
 	</c:forEach>
-	</ul>
 </body>
-</html>
+</html> 

@@ -8,13 +8,10 @@ public class Address {
 	private String state;
 	private String zip;
 	
-	public Address(){
-		
-	}
+	public Address(){}
 	
-	public Address(Long i,String street, String city, String state, String zip) {
+	public Address(String street, String city, String state, String zip) {
 		super();
-		this.id=id;
 		this.Street = street;
 		this.city = city;
 		this.state = state;

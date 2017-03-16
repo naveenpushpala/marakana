@@ -2,9 +2,8 @@ package com.marakana.contacts.entities;
 
 public class Contact {
 
-	public Contact(Long id, String name, Long addressId) {
+	public Contact(String name, Long addressId) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.addressId = addressId;
 	}
