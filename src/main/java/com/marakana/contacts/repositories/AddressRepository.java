@@ -15,10 +15,17 @@ import com.marakana.contacts.entities.Address;
 public class AddressRepository {
 	private DataSource ds;
 	
-	public AddressRepository() throws NamingException{
-		Context context = new InitialContext();
-		 ds = (DataSource) context.lookup("java:comp/env/jdbc/trainingdb");
-		context.close();
+	public AddressRepository() {
+		Context context;
+		try {
+			context = new InitialContext();
+			 ds = (DataSource) context.lookup("java:comp/env/jdbc/trainingdb");
+			 context.close();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void init() throws NamingException, SQLException{
