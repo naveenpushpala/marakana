@@ -30,8 +30,29 @@ public class ContactServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		if (request.getParameter("add") != null) {
 			request.getRequestDispatcher("jsp/addContact.jsp").forward(request, response);
-		} else {
-			super.doGet(request, response);
+		} 
+		
+		else {
+			//get contact id from request parameter, and populate model with
+			// the contact and address objects
+		long id = Long.parseLong(request.getParameter("id"));
+		try {
+			Contact contact = contactRepository.find(id);
+			Address address = addressRepository.find(id);
+			request.setAttribute("contact", contact);
+			request.setAttribute("address", address);
+			if(request.getParameter("edit") != null){
+				
+				request.getRequestDispatcher("jsp/editContact.jsp").forward(request, response);
+
+			}
+			
+			request.getRequestDispatcher("jsp/viewContact.jsp").forward(request, response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		}
 	}
 
@@ -48,9 +69,28 @@ public class ContactServlet extends HttpServlet {
 				addressRepository.create(address);
 				Contact contact = new Contact(request.getParameter("name"), address.getId());
 				contactRepository.create(contact);
-				response.sendRedirect("contacts");
+			//	response.sendRedirect("contacts");
+				request.getRequestDispatcher("contact?id=" +contact.getId()).forward(request, response);
+			
 			}
-
+			else if(request.getParameter("edit") != null)
+			{
+				long id = Long.parseLong(request.getParameter("id"));
+				Contact contact = contactRepository.find(id);
+				Address address = addressRepository.find(contact.getAddressId());
+				contact.setName(request.getParameter("name"));
+				address.setStreet(request.getParameter("street"));
+				address.setCity(request.getParameter("city"));
+				address.setState(request.getParameter("state"));
+				address.setZip(request.getParameter("zip"));
+				contactRepository.update(contact);
+				addressRepository.update(address);
+				response.sendRedirect("contact?id=" +contact.getId());
+			}
+			else
+			{
+				request.getRequestDispatcher("jsp/viewContact.jsp").forward(request, response);
+			}
 		} catch (SQLException e) {
 			throw new ServletException(e);
 

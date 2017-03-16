@@ -12,8 +12,8 @@
 	<%-- 	<h1>Hello, ${contact.name}!</h1>
 		<h1>Hello, ${contact.addressId}!</h1>
 	 --%>	
-	 <li><a href="???">${contact.name}</a></li>
-	</c:forEach>\
+	 <li><a href="contact?id=${contact.id}">${contact.name}</a></li>
+	</c:forEach>
 	<a href="contact?add">add a new contact</a>
 	
 </body>
