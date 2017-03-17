@@ -20,9 +20,14 @@
 		<li>state: <input type="text" name="state" value="${address.state} }"></li>
 		<li>zip: <input type="text" name="zip" value="${address.zip} }"></li>
 	</ul>
+	
 	<input type="submit" value="edit">
-	<a href="contacts">to list </a>
-
 </form>
+	<form action="contact" method="post">
+		<input type="hidden" name="delete">
+		<input type="hidden" name="id" value="${contact.id}">
+		<input type="submit" value="delete">
+	</form>
+	<a href="contacts">to list </a>
 </body>
 </html> 

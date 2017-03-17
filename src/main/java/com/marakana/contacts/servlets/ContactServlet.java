@@ -87,6 +87,17 @@ public class ContactServlet extends HttpServlet {
 				addressRepository.update(address);
 				response.sendRedirect("contact?id=" +contact.getId());
 			}
+			else if(request.getParameter("delete") != null)
+			{
+				long id = Long.parseLong(request.getParameter("id"));
+				Contact contact = contactRepository.find(id);
+				Address address = addressRepository.find(contact.getAddressId());
+				contactRepository.delete(contact);
+				addressRepository.delete(address);
+				//response.sendRedirect("contact?id=" +contact.getId());
+				response.sendRedirect("contacts");
+			}	
+		
 			else
 			{
 				request.getRequestDispatcher("jsp/viewContact.jsp").forward(request, response);
