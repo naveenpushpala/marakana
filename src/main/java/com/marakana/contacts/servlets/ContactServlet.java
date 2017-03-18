@@ -21,7 +21,6 @@ public class ContactServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final AddressRepository addressRepository = new AddressRepository();
 	private final ContactRepository contactRepository = new ContactRepository();
 
 	@Override
@@ -37,9 +36,7 @@ public class ContactServlet extends HttpServlet {
 			// the contact and address objects
 		long id = Long.parseLong(request.getParameter("id"));
 			Contact contact = contactRepository.find(id);
-			Address address = addressRepository.find(id);
 			request.setAttribute("contact", contact);
-			request.setAttribute("address", address);
 			if(request.getParameter("edit") != null){
 				
 				request.getRequestDispatcher("jsp/editContact.jsp").forward(request, response);
@@ -60,7 +57,6 @@ public class ContactServlet extends HttpServlet {
 			if (request.getParameter("add") != null) {
 				Address address = new Address(request.getParameter("street"), request.getParameter("city"),
 						request.getParameter("state"), request.getParameter("zip"));
-				address =addressRepository.save(address);
 				Contact contact = new Contact(request.getParameter("name"), address);
 				contact = contactRepository.save(contact);
 			//	response.sendRedirecst("contacts");
@@ -78,7 +74,6 @@ public class ContactServlet extends HttpServlet {
 				address.setZip(request.getParameter("zip"));
 				response.sendRedirect("contact?id=" +request.getParameter("id"));
 				contactRepository.save(contact);
-				addressRepository.save(address);
 			}
 			else if(request.getParameter("delete") != null)
 			{
@@ -86,7 +81,6 @@ public class ContactServlet extends HttpServlet {
 				Contact contact = contactRepository.find(id);
 				Address address = contact.getAddress();
 				contactRepository.delete(contact);
-				addressRepository.delete(address);
 				//response.sendRedirect("contact?id=" +contact.getId());
 				response.sendRedirect("contacts");
 			}	

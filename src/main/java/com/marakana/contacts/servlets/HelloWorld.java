@@ -24,7 +24,10 @@ public class HelloWorld extends HttpServlet {
 		String[] names = request.getParameter("names").split("\\|");
 		request.setAttribute("names", names);
 		RequestDispatcher view = request.getRequestDispatcher("jsp/hello.jsp");
+		RequestDispatcher view1 = request.getRequestDispatcher("jsp/hello.jsp");
+
 		view.forward(request, response);
+	
 	}
 
 }

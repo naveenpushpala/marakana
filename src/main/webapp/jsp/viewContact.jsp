@@ -13,6 +13,7 @@
 <form action ="contact?add" method="post">
 <input type="hidden" name="add">
 	<ul>
+		<c:set var="address" value="${contact.address}" />
 		<li>street: ${address.street}</li>
 		<li>city: ${address.city} </li>
 		<li>state:${address.state}</li>
