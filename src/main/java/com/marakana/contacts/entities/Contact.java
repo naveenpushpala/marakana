@@ -1,5 +1,11 @@
 package com.marakana.contacts.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Contact {
 
 	public Contact(String name, Long addressId) {
@@ -9,8 +15,14 @@ public class Contact {
 	}
 	
 	public Contact(){}
+	@Id
+	@GeneratedValue
 	private Long id;
+	
+	@Column
 	private String name;
+	
+	@Column
 	private Long addressId;
 	
 	public Long getId() {

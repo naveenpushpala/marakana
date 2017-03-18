@@ -26,15 +26,10 @@ public class ContactListServlet extends HttpServlet {
 	//	response.setContentType("text/html");
 	//	response.getWriter().println("<html><body><h1>HelloWorld</h1></body></html>");
 		
-		try {
 			request.setAttribute("contacts", contactRepository.findAll());
 			RequestDispatcher view = request.getRequestDispatcher("jsp/contactList.jsp");
 			view.forward(request, response);
 		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			throw new ServletException(e);
-		}
 		
 	}
 }

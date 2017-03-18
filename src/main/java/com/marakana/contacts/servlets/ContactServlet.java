@@ -36,7 +36,6 @@ public class ContactServlet extends HttpServlet {
 			//get contact id from request parameter, and populate model with
 			// the contact and address objects
 		long id = Long.parseLong(request.getParameter("id"));
-		try {
 			Contact contact = contactRepository.find(id);
 			Address address = addressRepository.find(id);
 			request.setAttribute("contact", contact);
@@ -48,10 +47,7 @@ public class ContactServlet extends HttpServlet {
 			}
 			
 			request.getRequestDispatcher("jsp/viewContact.jsp").forward(request, response);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 		}
 	}
@@ -61,19 +57,16 @@ public class ContactServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		try {
-
 			if (request.getParameter("add") != null) {
 				Address address = new Address(request.getParameter("street"), request.getParameter("city"),
 						request.getParameter("state"), request.getParameter("zip"));
-				addressRepository.create(address);
+				address =addressRepository.save(address);
 				Contact contact = new Contact(request.getParameter("name"), address.getId());
-				contactRepository.create(contact);
-			//	response.sendRedirect("contacts");
-				request.getRequestDispatcher("contact?id=" +contact.getId()).forward(request, response);
-			
+				contact = contactRepository.save(contact);
+			//	response.sendRedirecst("contacts");
+				response.sendRedirect("contact?id=" +contact.getId());
 			}
-			else if(request.getParameter("edit") != null)
+			else if(request.getParameter("edit") != null) 
 			{
 				long id = Long.parseLong(request.getParameter("id"));
 				Contact contact = contactRepository.find(id);
@@ -83,9 +76,9 @@ public class ContactServlet extends HttpServlet {
 				address.setCity(request.getParameter("city"));
 				address.setState(request.getParameter("state"));
 				address.setZip(request.getParameter("zip"));
-				contactRepository.update(contact);
-				addressRepository.update(address);
-				response.sendRedirect("contact?id=" +contact.getId());
+				response.sendRedirect("contact?id=" +request.getParameter("id"));
+				contactRepository.save(contact);
+				addressRepository.save(address);
 			}
 			else if(request.getParameter("delete") != null)
 			{
@@ -102,10 +95,7 @@ public class ContactServlet extends HttpServlet {
 			{
 				request.getRequestDispatcher("jsp/viewContact.jsp").forward(request, response);
 			}
-		} catch (SQLException e) {
-			throw new ServletException(e);
-
-		}
+		
 	}
 
 }
