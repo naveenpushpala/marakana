@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Contact</title>
+<title>Add person</title>
 </head>
 <body>
-	<c:forEach var="contact" items="${contacts}">
+	<c:forEach var="person" items="${persons}">
 	<%-- 	<h1>Hello, ${contact.name}!</h1>
 		<h1>Hello, ${contact.addressId}!</h1>
 	 --%>	
-	 <li><a href="person?id=${contact.id}">${contact.name}</a></li> <!-- FIX ME: url -->
+	 <li><a href="person?id=${person.id}">${person.name}</a></li>
 	</c:forEach>
 	<a href="person?add">add a new person</a>
 	
