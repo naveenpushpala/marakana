@@ -20,7 +20,7 @@
 		<li>zip:${address.zip} </li>
 	</ul>
 	<a href="contacts">to list </a>
-	<a href="person?edit&id=${person.id}">edit person </a> |<a href="contacts">back to contacts</a>
+	<a href="${person.id}&edit">edit person </a> |<a href="contacts">back to contacts</a>
 </form>
 </body>
 </html>

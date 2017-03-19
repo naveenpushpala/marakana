@@ -5,13 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Contact</title>
+<title>view company</title>
 </head>
 <body>
-	<c:forEach var="contact" items="${contacts}">
-	 <li><a href="person?id=${contact.url}">${contact.name}</a></li> <!-- FIX ME: url -->
-	</c:forEach>
-	<a href="person?add">add a new person</a>| <a href="company?add">add new Company</a>
-	
+
+<h1>${company.name}</h1>
+<form action ="company?add" method="post">
+<input type="hidden" name="add">
+<!-- TODO list offices -->
+
+	<a href="contacts">to list </a>
+	<a href="company?edit&id=${company.url}&edit">edit company </a> |<a href="contacts">back to contacts</a>
+</form>
 </body>
-</html> 
+</html>

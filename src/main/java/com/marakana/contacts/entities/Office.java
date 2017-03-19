@@ -7,11 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Office {
+public class Office extends BaseEntity{
 
-	@Id
-	@GeneratedValue
-	private Long id;
+
 	
 	@Column
 	private String name;
@@ -30,14 +28,7 @@ public class Office {
 	public Office() {
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public Address getAddress() {
 		return address;
 	}
